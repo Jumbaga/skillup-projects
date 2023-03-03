@@ -38,7 +38,7 @@ for developer_name in developer_names:
 project_set = set(project_list)
 
 #Step three of the task, changing the names on the project list to a format of ASPIRE_projectname
-aspire_projects = ['ASPIRE_'+projectname for projectname in project_list]
+aspire_projects = ['ASPIRE_' + projectname for projectname in project_names]
 print(aspire_projects)
              
 
