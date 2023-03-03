@@ -39,7 +39,26 @@ project_set = set(project_list)
 
 #Step three of the task, changing the names on the project list to a format of ASPIRE_projectname
 aspire_projects = ['ASPIRE_' + projectname for projectname in project_names]
-print(aspire_projects)
-             
 
+#Step four of the task, a function has developer name and a list of projects as dependencies and adds it to the developers dictionary
+#and returns the new total number of developers, using type safety and filtering duplicates
+def add_developer(dev_name, dev_projects):
+    if type(dev_name) is str and type(dev_projects) is list and dev_name not in developers.keys():
+        developers[dev_name]=dev_projects
+        number_of_developers = len(developers.keys())
+        print(f'Number of developers changed from {number_of_developers - 1} to {number_of_developers}')
+        return number_of_developers
+    else:
+        print("Incorrect format, provide a name and a list, or, the developer name provided already exists")
+
+#Checking if correct format and not duplicate is added    
+add_developer("Tito",["Company website", "Fashion store website"])
+#Checking if will block duplicate developer names
+add_developer("Tito",["Project Ocean"])
+#Checking if will block duplicate and incorrect format for the 2nd argument
+add_developer("Tito", 5)
+#Checking if will block incorrect format for the 1st argument
+add_developer(5,["Company website"])
+#Checking if will block incorrect format for the 1st and 2nd arguments
+add_developer(10,"purple")
 
