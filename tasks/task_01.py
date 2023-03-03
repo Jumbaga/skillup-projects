@@ -37,6 +37,9 @@ for developer_name in developer_names:
 #Step two of the task creating a set with project names (I had already made this in step one without using a set, filtering the results)
 project_set = set(project_list)
 
+#Step three of the task, changing the names on the project list to a format of ASPIRE_projectname
+aspire_projects = ['ASPIRE_' + projectname for projectname in project_names]
+print(aspire_projects)
              
 
 
