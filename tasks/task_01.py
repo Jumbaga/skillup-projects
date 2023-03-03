@@ -23,7 +23,7 @@ developer_names = list(developers.keys())
 #Creating an empty projects dictionary
 projects = {}
 
-#Populating projects dictionary keys with project names and initializing value at None
+#Populating projects dictionary keys with project names
 for project_name in project_names:
     projects[project_name] = []
 
@@ -34,7 +34,9 @@ for developer_name in developer_names:
         if developer_name not in projects[project_name]:
             projects[project_name].append(developer_name)
 
-print(projects)
+#Step two of the task creating a set with project names (I had already made this in step one without using a set, filtering the results)
+project_set = set(project_list)
+
              
 
 
