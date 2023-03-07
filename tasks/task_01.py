@@ -1,3 +1,4 @@
+import numpy as np
 
 #Dictionary of developers and respective projects, key is developer name, value is a list of project names
 
@@ -44,21 +45,60 @@ aspire_projects = ['ASPIRE_' + projectname for projectname in project_names]
 #and returns the new total number of developers, using type safety and filtering duplicates
 def add_developer(dev_name, dev_projects):
     if type(dev_name) is str and type(dev_projects) is list and dev_name not in developers.keys():
-        developers[dev_name]=dev_projects
+        developers[dev_name] = dev_projects
         number_of_developers = len(developers.keys())
         print(f'Number of developers changed from {number_of_developers - 1} to {number_of_developers}')
         return number_of_developers
     else:
         print("Incorrect format, provide a name and a list, or, the developer name provided already exists")
 
-#Checking if correct format and not duplicate is added    
-add_developer("Tito",["Company website", "Fashion store website"])
-#Checking if will block duplicate developer names
-add_developer("Tito",["Project Ocean"])
-#Checking if will block duplicate and incorrect format for the 2nd argument
-add_developer("Tito", 5)
-#Checking if will block incorrect format for the 1st argument
-add_developer(5,["Company website"])
-#Checking if will block incorrect format for the 1st and 2nd arguments
-add_developer(10,"purple")
+#Receives a project name str and a time/revenue tupple, updates de projects on developers
+#dictionary to include the time/revenue on the respective projects
+def add_time_and_revenue(project_name, *args):
+    for time, revenue in args:
+        tupple_values = time, revenue
+        for dev_name in developers.keys():
+            if project_name in developers[dev_name]:
+                value = developers[dev_name].index(project_name)
+                developers[dev_name][value] = (project_name, tupple_values)
+                #print(developers)
+
+add_time_and_revenue("Company website",("240h", 5000))
+add_time_and_revenue("Food recognition",("300h", 8000))
+add_time_and_revenue("Animal recognition",("450h", 12000))
+add_time_and_revenue("NEXT website",("600h", 25000))
+add_time_and_revenue("WHAT",("150h", 7500))
+add_time_and_revenue("Plants watering system",("30h", 2000))
+add_time_and_revenue("Fashion store website",("750h", 5000))
+
+def print_dev_revenues():
+    book_keeping_dict = {}
+    dev_revenue_dict = {}
+    
+    for project in developers.values():
+        for project_name in project:
+            if project_name in book_keeping_dict.keys():
+                book_keeping_dict[project_name] += 1
+            else:
+                book_keeping_dict[project_name] = 1
+    
+    for dev_name in developers.keys():
+        dev_revenue_dict[dev_name] = []
+        for project_name in book_keeping_dict.keys():
+            if project_name in developers[dev_name]:
+                number_devs_in_proj = book_keeping_dict[project_name]
+                total_project_hours = int(developers[dev_name][developers[dev_name]
+                        .index(project_name)][1][0][:-1])
+                total_project_expense = developers[dev_name][developers[dev_name]
+                                                            .index(project_name)][1][1]
+                project_hours = int(total_project_hours/number_devs_in_proj)
+                dev_proj_income = int(total_project_expense/number_devs_in_proj)
+                dev_revenue_dict[dev_name].append(dev_proj_income)
+        dev_income_per_hour = sum(dev_revenue_dict[dev_name])/project_hours      
+        print(f'Developer {dev_name} earns {dev_income_per_hour} euros per hour')
+                         
+print_dev_revenues()
+
+
+        
 
