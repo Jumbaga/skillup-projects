@@ -1,5 +1,3 @@
-import numpy as np
-
 #Dictionary of developers and respective projects, key is developer name, value is a list of project names
 
 developers = {"Marshal": ["Company website", "Animal recognition", "Fashion store website"],
@@ -61,7 +59,6 @@ def add_time_and_revenue(project_name, *args):
             if project_name in developers[dev_name]:
                 value = developers[dev_name].index(project_name)
                 developers[dev_name][value] = (project_name, tupple_values)
-                #print(developers)
 
 add_time_and_revenue("Company website",("240h", 5000))
 add_time_and_revenue("Food recognition",("300h", 8000))
@@ -71,19 +68,31 @@ add_time_and_revenue("WHAT",("150h", 7500))
 add_time_and_revenue("Plants watering system",("30h", 2000))
 add_time_and_revenue("Fashion store website",("750h", 5000))
 
+#Function that prints developer income/hour, based on the hours and funds assigned to the project
+#divided by the number of developers working on that project
 def print_dev_revenues():
+#Creating an empty book keeping dictionary to store and later verify how many developers are
+#assigned to each project, has project name as key and number of developers as value, 
+#and an empty dictionary to store developer revenue that has developer name as key and 
+#a list of the income from the different projects the developer works on as values
     book_keeping_dict = {}
     dev_revenue_dict = {}
-    
+
+#Counting the number of developers in each project and storing that on the book keeping dictionary   
     for project in developers.values():
         for project_name in project:
             if project_name in book_keeping_dict.keys():
                 book_keeping_dict[project_name] += 1
             else:
                 book_keeping_dict[project_name] = 1
-    
+#Assigning dev_name as the key to the revenue dictionary and initializing the value as
+#an empty list and iterating through the developers in the developers dictionary    
     for dev_name in developers.keys():
         dev_revenue_dict[dev_name] = []
+#Iterating through the projects in the book keeping dictionary and comparing the project name
+#to the projects on developers dictionary keys, if they are the same, we store the project
+#expense and the project hours present on developers dictionary, divided by the number of
+#developers in the project, and use them to calculate the income/hour of the developer
         for project_name in book_keeping_dict.keys():
             if project_name in developers[dev_name]:
                 number_devs_in_proj = book_keeping_dict[project_name]
@@ -91,11 +100,14 @@ def print_dev_revenues():
                         .index(project_name)][1][0][:-1])
                 total_project_expense = developers[dev_name][developers[dev_name]
                                                             .index(project_name)][1][1]
-                project_hours = int(total_project_hours/number_devs_in_proj)
+                dev_hours = int(total_project_hours/number_devs_in_proj)
                 dev_proj_income = int(total_project_expense/number_devs_in_proj)
                 dev_revenue_dict[dev_name].append(dev_proj_income)
-        dev_income_per_hour = sum(dev_revenue_dict[dev_name])/project_hours      
-        print(f'Developer {dev_name} earns {dev_income_per_hour} euros per hour')
+#Final step is summing the income from all the developer's projects and dividing it by the hours
+#worked to get his income/hour, we also format our print string and round the result to 2
+#decimal places
+        dev_income_per_hour = sum(dev_revenue_dict[dev_name])/dev_hours     
+        print(f'Developer {dev_name} earns {round(dev_income_per_hour, 2)} euros per hour')
                          
 print_dev_revenues()
 
