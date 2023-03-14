@@ -54,4 +54,3 @@ def sort_by_income(prs_lst):
 
 #Funcion call, passed list from task_04 as argument simply to avoid having to re-write so many properties when I could re-use them    
 sort_by_income(my_peeps_lst)
-
