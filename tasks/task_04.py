@@ -33,7 +33,7 @@ class Person:
         self.surname = surname
     def set_municipality(self, municipality):
         self.municipality = municipality
-        
+
 #Data validation for UID, needs to be an 8 digit integer
     def set_UID(self):
         new_UID = input('Enter a portuguese UID, with 8 integers ')
@@ -62,14 +62,13 @@ domingos = Person('Domingos', 'Coelho', 12332112, 'Lisbon', date(1993, 3, 17))
 fabio = Person('Fabio', 'Salome', 12121212, 'Leiria', date(1990, 4, 25))
 
 #Putting them on a List
-my_peeps_lst = [mariana, hipolito, domingos, fabio, vitor]
+my_peeps_lst = [mariana, hipolito, vitor, domingos, fabio]
 
 def get_oldest():
-    #Sorting persons by DOB (see less override above) and selecting the first element (oldest DOB)
+    #Sorting persons by DOB (see less then override above) and selecting the first element (oldest DOB)
     oldest = sorted(my_peeps_lst)[0]
-    #Printing oldest person name, surname and DOB
+    #Printing oldest person object name, surname and DOB properties
     print(f'The oldest person is {oldest.name} {oldest.surname}, born on {oldest.DOB}.')
 
-get_oldest()
 
     
