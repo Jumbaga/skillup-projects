@@ -70,5 +70,6 @@ def get_oldest():
     #Printing oldest person object name, surname and DOB properties
     print(f'The oldest person is {oldest.name} {oldest.surname}, born on {oldest.DOB}.')
 
+get_oldest()
 
     
