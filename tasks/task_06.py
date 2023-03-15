@@ -59,7 +59,7 @@ class SciFi(Film):
         print(f'The movie {self._name} has a rating of {round((self._special_effects + self._stunts)/2, 2)} in the Sci-Fi genre.')
 
 #SciFi class, extends from Film inheriting name property and has to implement rate movie method, has special authenticity and 
-# viewership as dependencies and private properties.
+#viewership as dependencies and private properties.
 class Documentary(Film):
     def __init__(self, name, authenticity, viewership):
         super().__init__(name)
@@ -142,7 +142,8 @@ def craft_movie_lst(lst):
 
 #Creating a list with random names valid and invalid to test our function
 movies_lst = ["Beauty and the Beast", "The Lion King", "The Godfather", 
-          "Fellowship of the Ring", "And You", "The and", "And The"]
+          "Fellowship of the Ring", "And You", "The and", "And The", 
+          "theund", "theand", "the und", "8the", "8 the"]
 
 #Printing the function call and passing the movie list
 print(craft_movie_lst(movies_lst))
