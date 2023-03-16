@@ -117,25 +117,21 @@ the_coat.stunts = -15
 knowledge.viewership = 1000
 garbage.authenticity = -9001
 
-
 #Method to return a list of movies with the word "the" but not the word "and", has a list of strings as a dependency.
 def craft_movie_lst(lst):
     #Creating and empty list to populate with valid movies
     movie_lst = []
-
+    #Regex expression to find strings containing the word "the" but not the word "and"
+    expression = r'^\s*(?!.*\band\b).*\bthe\b.*$'
     #Iterating through the provided list
     for movie in lst:
         
-        #Using regex and re module to store match object on variables, we are searching for any match as long has it has at least
-        #1 word "the" we store it on the_search, and we do the same for the word "and" but store in and_search variable. Also made
-        #regex case-insensitive.
-        the_search = re.search(r'\bthe\b', movie, re.IGNORECASE)
-        and_search = re.search(r'\band\b', movie, re.IGNORECASE)
+        #Using regex and re module to store match object on a variable
+        search = re.search(expression, movie, re.IGNORECASE)
 
-        #Because we want movie names with the word "the" but not the word "and" we are using this conditional to do just that:
-        #Since re.search returns a match object if it has any matches and None if it has no matches we are interested in the cases
-        #where the_search has a match object stored in it but and_search has None, then we append the movie to the list
-        if the_search is not None and and_search is None:
+        #Since re.search returns a match object if it has any matches we use this conditional
+        #to check if the movie complies with the expression then we append the movie to the list
+        if type(search) is re.Match:
             movie_lst.append(movie)
     #Returning a list of valid names
     return movie_lst
@@ -143,7 +139,7 @@ def craft_movie_lst(lst):
 #Creating a list with random names valid and invalid to test our function
 movies_lst = ["Beauty and the Beast", "The Lion King", "The Godfather", 
           "Fellowship of the Ring", "And You", "The and", "And The", 
-          "theund", "theand", "the und", "8the", "8 the"]
+          "theund", "theand", "the und", "8the", "8 the", "8 ThE"]
 
 #Printing the function call and passing the movie list
 print(craft_movie_lst(movies_lst))
