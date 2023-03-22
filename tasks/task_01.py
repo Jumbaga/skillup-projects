@@ -57,8 +57,8 @@ def add_time_and_revenue(project_name, *args):
         tupple_values = time, revenue
         for dev_name in developers.keys():
             if project_name in developers[dev_name]:
-                value = developers[dev_name].index(project_name)
-                developers[dev_name][value] = (project_name, tupple_values)
+                index = developers[dev_name].index(project_name)
+                developers[dev_name][index] = (project_name, tupple_values)
 
 add_time_and_revenue("Company website",("240h", 5000))
 add_time_and_revenue("Food recognition",("300h", 8000))
@@ -96,10 +96,9 @@ def print_dev_revenues():
         for project_name in book_keeping_dict.keys():
             if project_name in developers[dev_name]:
                 number_devs_in_proj = book_keeping_dict[project_name]
-                total_project_hours = int(developers[dev_name][developers[dev_name]
-                        .index(project_name)][1][0][:-1])
-                total_project_expense = developers[dev_name][developers[dev_name]
-                                                            .index(project_name)][1][1]
+                proj_index = developers[dev_name].index(project_name)
+                total_project_hours = int(developers[dev_name][proj_index][1][0][:-1])
+                total_project_expense = developers[dev_name][proj_index][1][1]
                 dev_hours = int(total_project_hours/number_devs_in_proj)
                 dev_proj_income = int(total_project_expense/number_devs_in_proj)
                 dev_revenue_dict[dev_name].append(dev_proj_income)
