@@ -56,7 +56,8 @@ class SciFi(Film):
                   f'Valid values range from [{min(valid_range)} - {max(valid_range)}]')
     #Overriding of rate movie method, its a simple print doing some basic math operations with the properties of the object
     def rate_movie(self):
-        print(f'The movie {self._name} has a rating of {round((self._special_effects + self._stunts)/2, 2)} in the Sci-Fi genre.')
+        rating = round((self._special_effects + self._stunts) / 2, 2)
+        print(f'The movie {self._name} has a rating of {rating} in the Sci-Fi genre.')
 
 #SciFi class, extends from Film inheriting name property and has to implement rate movie method, has special authenticity and 
 #viewership as dependencies and private properties.
@@ -96,7 +97,8 @@ class Documentary(Film):
                   f'Valid values range from [{min(valid_range)} - {max(valid_range)}]')
     #Overriding of rate movie method, its a simple print doing some basic math operations with the properties of the object
     def rate_movie(self):
-        print(f'The movie {self._name} has a rating of {round(self._authenticity/100 * self._viewership, 2)} in the Documentary genre.')
+        rating = round(self._authenticity/100 * self._viewership, 2)
+        print(f'The movie {self._name} has a rating of {rating} in the Documentary genre.')
 
 #Creating 2 instances of SciFi
 the_goat = SciFi("Star Wars: A New Hope", 10, 10)
@@ -142,4 +144,5 @@ movies_lst = ["Beauty and the Beast", "The Lion King", "The Godfather",
           "theund", "theand", "the und", "8the", "8 the", "8 ThE"]
 
 #Printing the function call and passing the movie list
-print(craft_movie_lst(movies_lst))
+print(f'Provied list: {movies_lst}')
+print(f'Filtered list: {craft_movie_lst(movies_lst)}')
