@@ -18,7 +18,7 @@ def execute_queries(mysql_queries):
         if key == "select_e_names":
             try:
                 before_del = cursor.execute(all_emps_str)
-                print(f'Employees before deletion: {before_del}')
+                print(f'Employees before deletion: {before_del} \n {cursor.fetchall()}')
             except Exception as beforedel:
                 print(f'Exception: {beforedel} as occured when trying to select '
                        'all employees before deleting')
@@ -30,7 +30,7 @@ def execute_queries(mysql_queries):
 
     try:
         after_del = cursor.execute(all_emps_str)
-        print(f'Employees after deletion: {after_del}')
+        print(f'Employees after deletion: {after_del} \n {cursor.fetchall()}')
     except Exception as afterdel:
                 print(f'Exception: {afterdel} as occured when trying to select '
                        'all employees before deleting')

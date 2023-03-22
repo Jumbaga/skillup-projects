@@ -119,8 +119,9 @@ the_coat.stunts = -15
 knowledge.viewership = 1000
 garbage.authenticity = -9001
 
-#Method to return a list of movies with the word "the" but not the word "and", has a list of strings as a dependency.
-def craft_movie_lst(lst):
+#Method to return a list of movies with the word "the" but not the word "and", 
+#has a list of strings of movie names as a dependency.
+def filter_movie_lst(lst):
     #Creating and empty list to populate with valid movies
     movie_lst = []
     #Regex expression to find strings containing the word "the" but not the word "and"
@@ -128,7 +129,7 @@ def craft_movie_lst(lst):
     #Iterating through the provided list
     for movie in lst:
         
-        #Using regex and re module to store match object on a variable
+        #Using regex expression and re module to store match object on a variable
         search = re.search(expression, movie, re.IGNORECASE)
 
         #Since re.search returns a match object if it has any matches we use this conditional
@@ -143,6 +144,7 @@ movies_lst = ["Beauty and the Beast", "The Lion King", "The Godfather",
           "Fellowship of the Ring", "And You", "The and", "And The", 
           "theund", "theand", "the und", "8the", "8 the", "8 ThE"]
 
-#Printing the function call and passing the movie list
+#Printing provided list
 print(f'Provied list: {movies_lst}')
-print(f'Filtered list: {craft_movie_lst(movies_lst)}')
+#Printing the function call and passing the movie list
+print(f'Filtered list: {filter_movie_lst(movies_lst)}')
