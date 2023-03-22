@@ -16,15 +16,26 @@ def execute_queries(mysql_queries):
 
     for key, value in mysql_queries.items():
         if key == "select_e_names":
-            before_del = cursor.execute(all_emps_str)
-            print(f'Employees before deletion: {before_del}')
+            try:
+                before_del = cursor.execute(all_emps_str)
+                print(f'Employees before deletion: {before_del}')
+            except Exception as beforedel:
+                print(f'Exception: {beforedel} as occured when trying to select '
+                       'all employees before deleting')
+
         try:
             cursor.execute(value)
         except Exception as sqle:
             print(f'Exception: {sqle} as occured when performing query: {value}')
-    after_del = cursor.execute(all_emps_str)
-    print(f'Employees after deletion: {after_del}')
-    connection.close()
+
+    try:
+        after_del = cursor.execute(all_emps_str)
+        print(f'Employees after deletion: {after_del}')
+    except Exception as afterdel:
+                print(f'Exception: {afterdel} as occured when trying to select '
+                       'all employees before deleting')
+    finally:
+        connection.close()
 
 execute_queries(queries_collection)
 
