@@ -19,20 +19,20 @@ def execute_queries(mysql_queries):
             try:
                 before_del = cursor.execute(all_emps_str)
                 print(f'Employees before deletion: {before_del} \n {cursor.fetchall()}')
-            except Exception as beforedel:
-                print(f'Exception: {beforedel} as occured when trying to select '
+            except Exception as beforedel_e:
+                print(f'Exception: {beforedel_e} as occured when trying to select '
                        'all employees before deleting')
 
         try:
             cursor.execute(value)
-        except Exception as sqle:
-            print(f'Exception: {sqle} as occured when performing query: {value}')
+        except Exception as sql_e:
+            print(f'Exception: {sql_e} as occured when performing query: {value}')
 
     try:
         after_del = cursor.execute(all_emps_str)
         print(f'Employees after deletion: {after_del} \n {cursor.fetchall()}')
-    except Exception as afterdel:
-                print(f'Exception: {afterdel} as occured when trying to select '
+    except Exception as afterdel_e:
+                print(f'Exception: {afterdel_e} as occured when trying to select '
                        'all employees before deleting')
     finally:
         connection.close()
