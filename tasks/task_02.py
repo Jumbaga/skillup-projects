@@ -30,7 +30,7 @@ def hospitalization_rate():
         comparisson_frame = pd.read_csv(csv_path)
         positive_patients = comparisson_frame.iloc[compare_date.day - 1].values[0]
         hospitalized_patients = comparisson_frame.iloc[compare_date.day - 1].values[1]
-        rate = int(hospitalized_patients/positive_patients * 100)
+        rate = round(hospitalized_patients/positive_patients * 100, 2)
 
         print(f'On {compare_date}, {int(positive_patients)} patients tested positive, '
             f'{int(hospitalized_patients)} got hospitalized, '

@@ -77,36 +77,51 @@ def print_dev_revenues():
 #a list of the income from the different projects the developer works on as values
     book_keeping_dict = {}
     dev_revenue_dict = {}
-
-#Counting the number of developers in each project and storing that on the book keeping dictionary   
-    for project in developers.values():
-        for project_name in project:
-            if project_name in book_keeping_dict.keys():
-                book_keeping_dict[project_name] += 1
-            else:
-                book_keeping_dict[project_name] = 1
-#Assigning dev_name as the key to the revenue dictionary and initializing the value as
+    #Assigning dev_name as the key to the revenue dictionary and initializing the value as
 #an empty list and iterating through the developers in the developers dictionary    
     for dev_name in developers.keys():
         dev_revenue_dict[dev_name] = []
+    
+#Counting the number of developers in each project and storing that on the book keeping dictionary
+    for project_name in project_set:
+        book_keeping_dict[project_name] = []
+    
+
+    for developer_name in developers.keys():
+
+        for project in project_list:
+            if developer_name not in book_keeping_dict[project] and project in developers[developer_name][0][0]:
+                print(project,developer_name)
+                book_keeping_dict[project].append(developer_name)
+        # print(book_keeping_dict)
+
+
+    # for project in developers.values():
+    #     for project_name in project:
+    #         if project_name in book_keeping_dict.keys():
+    #             book_keeping_dict[project_name] += 1
+    #         else:
+    #             book_keeping_dict[project_name] = 1
+
 #Iterating through the projects in the book keeping dictionary and comparing the project name
 #to the projects on developers dictionary keys, if they are the same, we store the project
 #expense and the project hours present on developers dictionary, divided by the number of
 #developers in the project, and use them to calculate the income/hour of the developer
-        for project_name in book_keeping_dict.keys():
-            if project_name in developers[dev_name]:
-                number_devs_in_proj = book_keeping_dict[project_name]
-                proj_index = developers[dev_name].index(project_name)
-                total_project_hours = int(developers[dev_name][proj_index][1][0][:-1])
-                total_project_expense = developers[dev_name][proj_index][1][1]
-                dev_hours = int(total_project_hours/number_devs_in_proj)
-                dev_proj_income = int(total_project_expense/number_devs_in_proj)
-                dev_revenue_dict[dev_name].append(dev_proj_income)
+    for project_lst in book_keeping_dict.values():
+        for proj in project_lst:
+            number_devs_in_proj = len(book_keeping_dict[proj])
+            proj_index = developers[developer_name].index(proj)
+            total_project_hours = int(developers[developer_name][proj_index][1][0][:-1])
+            total_project_expense = developers[developer_name][proj_index][1][1]
+            dev_hours = int(total_project_hours/number_devs_in_proj)
+            dev_proj_income = int(total_project_expense/number_devs_in_proj)
+            dev_revenue_dict[developer_name].append(dev_proj_income)
 #Final step is summing the income from all the developer's projects and dividing it by the hours
 #worked to get his income/hour, we also format our print string and round the result to 2
 #decimal places
-        dev_income_per_hour = sum(dev_revenue_dict[dev_name])/dev_hours     
-        print(f'Developer {dev_name} earns {round(dev_income_per_hour, 2)} euros per hour')
+            
+    # dev_income_per_hour = round(sum(dev_revenue_dict[developer_name])/dev_hours, 2)     
+    # print(f'Developer {developer_name} earns {dev_income_per_hour} euros per hour')
                          
 print_dev_revenues()
 
