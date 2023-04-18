@@ -35,9 +35,11 @@ def hospitalization_rate():
         print(f'On {compare_date}, {int(positive_patients)} patients tested positive, '
             f'{int(hospitalized_patients)} got hospitalized, '
             f'making it a {rate}% hospitalization rate for the day.')
+        print(type(compare_date))
 #Print string for invalid input formats/invalid dates        
     else:
         print('Incorrect format or invalid date, you can only consult the days of February 2021')
+
 
 hospitalization_rate()
 
